@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.workmade.myWallet.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,5 +30,12 @@ public class User {
 	private String name;
 	@Column(nullable= false)
 	private String password;
-
+	
+	
+	public User(UserDTO dto){
+		this.userId = dto.getUserId();
+		this.email = dto.getEmail();
+		this.name = dto.getName();
+		this.password = dto.getPassword();
+	}
 }
