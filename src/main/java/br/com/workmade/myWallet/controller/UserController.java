@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.workmade.myWallet.dto.UserDTO;
 import br.com.workmade.myWallet.model.User;
 import br.com.workmade.myWallet.service.UserService;
+import br.com.workmade.myWallet.utils.Bcrypt;
 import br.com.workmade.myWallet.utils.Response;
 
 @RestController
@@ -37,7 +38,9 @@ public class UserController {
 			.forEach(erro -> response.getErrors().put( ( (FieldError) erro).getField(), erro.getDefaultMessage()));
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
+		userDTO.setPassword(Bcrypt.getHash(userDTO.getPassword()));
 		User userSaved = userService.save(new User(userDTO));
+		userSaved.setPassword(null);
 		
 		response.setData(new UserDTO(userSaved));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
