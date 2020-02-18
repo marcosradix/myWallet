@@ -28,7 +28,7 @@ public class UserWallet {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="user_wallet_id")
-	private Long user_wallet_id;
+	private Long userWalletId;
 	
 	@JoinColumn(name="user", referencedColumnName="user_id")
 	@ManyToOne(fetch=FetchType.LAZY) // trará apenas o id
@@ -37,6 +37,8 @@ public class UserWallet {
 	@JoinColumn(name="wallet", referencedColumnName="wallet_id")
 	@ManyToOne(fetch=FetchType.LAZY) // trará apenas o id
 	private Wallet wallet;
+	
+
 
 
 }
