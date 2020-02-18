@@ -11,20 +11,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class WalletDTO {
 
 	private Long walletId;
 	
 	@Column(nullable= false)
-	@Size(min=3)
+	@Size(min=3, message="O tamanho deve ser de no mínimo 3 caracters")
 	@NotNull
 	private String name;
-	@NotNull
+	@NotNull(message="Este campo deve ser preenchido")
 	@Column(nullable= false)
 	private BigDecimal value;
 

@@ -1,48 +1,42 @@
 package br.com.workmade.myWallet.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.workmade.myWallet.dto.WalletDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
+@Table(name="user_wallet")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "Wallet")
 @ToString
-public class Wallet {
+public class UserWallet {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="wallet_id")
-	private Long walletId;
+	@Column(name="user_wallet_id")
+	private Long user_wallet_id;
 	
-	@Column(nullable= false)
-	private String name;
+	@JoinColumn(name="user", referencedColumnName="user_id")
+	@ManyToOne(fetch=FetchType.LAZY) // trará apenas o id
+	private User user;
 	
-	@Column(nullable= false)
-	private BigDecimal value;
-	
-	
-	public Wallet(WalletDTO dto) {
-		this.walletId = dto.getWalletId();
-		this.name = dto.getName();
-		this.value = dto.getValue();
-	}
-
+	@JoinColumn(name="wallet", referencedColumnName="wallet_id")
+	@ManyToOne(fetch=FetchType.LAZY) // trará apenas o id
+	private Wallet wallet;
 
 
 }

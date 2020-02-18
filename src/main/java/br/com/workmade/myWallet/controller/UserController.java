@@ -17,9 +17,11 @@ import br.com.workmade.myWallet.model.User;
 import br.com.workmade.myWallet.service.UserService;
 import br.com.workmade.myWallet.utils.Bcrypt;
 import br.com.workmade.myWallet.utils.Response;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(value="user")
+@Slf4j
 public class UserController {
 
 	@Autowired
@@ -41,7 +43,7 @@ public class UserController {
 		userDTO.setPassword(Bcrypt.getHash(userDTO.getPassword()));
 		User userSaved = userService.save(new User(userDTO));
 		userSaved.setPassword(null);
-		
+		log.info("Usuário salvo:{}",userSaved);
 		response.setData(new UserDTO(userSaved));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		

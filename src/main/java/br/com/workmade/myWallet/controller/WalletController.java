@@ -16,9 +16,11 @@ import br.com.workmade.myWallet.dto.WalletDTO;
 import br.com.workmade.myWallet.model.Wallet;
 import br.com.workmade.myWallet.service.WalletService;
 import br.com.workmade.myWallet.utils.Response;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping(value="wallet")
+@Slf4j
 public class WalletController {
 
 	@Autowired
@@ -35,7 +37,7 @@ public class WalletController {
 
 		Wallet walletSaved = walletService.save(new Wallet(walletDTO));
 	
-		
+		log.info("Carteira criada: {}",walletSaved);
 		response.setData(new WalletDTO(walletSaved));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		
