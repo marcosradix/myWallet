@@ -24,11 +24,11 @@ create table user_wallet(
 
 create table wallet_item(
   wallet_item_id INT(11) NOT NULL AUTO_INCREMENT,
-  wallet_id INT(11) ,
+  wallet INT(11) ,
   date Date,
   type VARCHAR(2),
   description VARCHAR(500),
   value INT(10.2) ,
   CONSTRAINT wallet_item_pk PRIMARY KEY (wallet_item_id),
-  FOREIGN KEY (wallet_id) REFERENCES wallet(wallet_id)
+  FOREIGN KEY (wallet) REFERENCES wallet(wallet_id)
 );
